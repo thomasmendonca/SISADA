@@ -1,0 +1,202 @@
+PADRÃO DE COMMITS — SISADA
+===========================
+
+Vamos usar a convenção "Conventional Commits".
+
+FORMATO
+-------
+tipo(escopo): descrição curta
+
+Exemplo:
+feat(auth): adiciona login com jwt
+
+O escopo é opcional:
+fix: corrige validação de nota
+
+
+TIPOS PRINCIPAIS
+----------------
+feat      -> nova funcionalidade
+fix       -> correção de bug
+refactor  -> alteração interna sem mudar comportamento
+test      -> criação ou alteração de testes
+docs      -> documentação
+chore     -> manutenção/configuração sem mudança funcional
+build     -> dependências, Docker, build
+ci        -> GitHub Actions / pipeline
+perf      -> melhoria de performance
+style     -> formatação/lint sem alterar lógica
+revert    -> desfaz commit anterior
+
+
+ESCOPOS PROVÁVEIS DO SISADA
+---------------------------
+auth
+users
+organization
+evaluations
+analytics
+reports
+ai
+audit
+db
+infra
+frontend
+
+
+EXEMPLOS
+--------
+feat(evaluations): cria modelo de ciclo de avaliação
+
+feat(auth): implementa geração de access token
+
+fix(evaluations): impede avaliação lateral do próprio aluno
+
+fix(auth): rejeita login de usuário inativo
+
+refactor(users): extrai validação de permissões para service
+
+test(evaluations): adiciona teste para avaliação duplicada
+
+docs: adiciona regras de domínio do sistema
+
+build: adiciona postgres ao docker compose
+
+ci: adiciona execução do pytest no pull request
+
+chore: adiciona arquivo env example
+
+
+REGRAS
+------
+1. Um commit deve representar uma mudança lógica pequena.
+
+Ruim:
+feat: faz login banco docker avaliação e dashboard
+
+Bom:
+build: adiciona postgres ao docker compose
+feat(auth): cria modelo de usuário
+feat(auth): implementa hash de senha
+feat(auth): implementa endpoint de login
+
+
+2. A descrição deve dizer O QUE o commit fez.
+
+Ruim:
+fix: ajustes
+
+Ruim:
+feat: mudanças
+
+Bom:
+fix(evaluations): corrige cálculo da média dos pares
+
+
+3. Usar descrição curta, objetiva e no presente.
+
+Preferência:
+feat(users): adiciona cadastro de aluno
+
+Evitar:
+feat(users): adicionado cadastro de aluno
+
+
+4. Não colocar ponto final.
+
+Bom:
+feat(auth): adiciona refresh token
+
+Evitar:
+feat(auth): adiciona refresh token.
+
+
+5. Não misturar mudanças sem relação no mesmo commit.
+
+Se você:
+- corrigiu autenticação;
+- mudou README;
+
+faça dois commits, se forem mudanças independentes.
+
+
+6. Antes do commit:
+
+git status
+git diff
+
+Depois selecione os arquivos:
+
+git add <arquivos>
+
+E faça:
+
+git commit -m "feat(auth): adiciona login com jwt"
+
+
+7. Não fazer commit de:
+- .env
+- senhas
+- tokens
+- chaves privadas
+- arquivos temporários
+- dados reais sensíveis
+
+
+BREAKING CHANGE
+---------------
+Se uma mudança quebrar compatibilidade deliberadamente:
+
+feat(api)!: altera estrutura da resposta de avaliação
+
+Ou no corpo/footer:
+
+BREAKING CHANGE: o campo student_id foi substituído por evaluatee_id
+
+
+COMMITS DE DOCUMENTAÇÃO INICIAL
+-------------------------------
+docs: adiciona product requirements
+
+docs: adiciona regras de domínio
+
+docs: adiciona modelo de dados
+
+docs: adiciona arquitetura do sistema
+
+docs: adiciona decisões arquiteturais
+
+
+REGRA PRÁTICA DO PROJETO
+------------------------
+Antes de considerar uma task concluída:
+
+1. git status
+2. git diff
+3. rodar testes aplicáveis
+4. rodar lint aplicável
+5. verificar se nenhum segredo entrou
+6. fazer commit pequeno e descritivo
+
+
+MODELO MENTAL
+-------------
+feat      = criei algo
+fix       = consertei algo
+refactor  = reorganizei sem mudar comportamento
+test      = testei algo
+docs      = documentei algo
+build     = alterei build/dependências/containers
+ci        = alterei pipeline
+chore     = manutenção geral
+
+
+PADRÃO OFICIAL DO SISADA
+------------------------
+Usaremos:
+
+tipo(escopo): descrição
+
+Exemplo ideal:
+
+feat(evaluations): adiciona criação de ciclo de avaliação
