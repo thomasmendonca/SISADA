@@ -3,9 +3,9 @@ import uvicorn
 
 app = FastAPI()
 
-@app.get('/health')
-async def home():
-    return {'mensagem':'Funcionando'}
+@app.get("/health")
+async def health():
+    return {"status": "ok"}
 
 if __name__ == "__main__":
     uvicorn.run(
